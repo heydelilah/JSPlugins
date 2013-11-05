@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+</head>
+<body>
+	<div class="wrap">
+		<p>1, </p>
+		<div class="amount">
+			<div >50,990,990</div>
+			<div id="demo1" class="traffic">50,990,990</div>
+		</div>
+	</div>
+
+	<div class="wrap">
+		<p>2,</p>
+		<div class="amount">
+			<div >5,00,000,000</div>
+			<div id="demo2" class="traffic">47,998,983</div>
+		</div>
+	</div>
+
+	<script src="libs/jquery-1.9.1.min.js"></script>
+	<script>
+	setInterval(function(){
+		var currentVal = $('#demo1').text();
+		var val = currentVal.replace(/,/g,'');
+		val++;
+		val = val.toString();
+		var pos = val.length;
+		var res = '';
+		var separator = ',';
+
+		while (pos > 3){
+				pos -= 3;
+				res = separator + val.substr(pos, 3) + res;
+			}
+		if (pos){
+			res = val.substr(0, pos) + res;
+		}
+
+		$('#demo1').text(res);
+	},500);
+
+	setInterval(function(){
+		var total = 5000000000, // 50
+			date = new Date(),
+			time = date.getHours()*60*60+date.getMinutes()*60+date.getSeconds(),
+			val = Math.round((total*time/86400+ total/86400*3)).toString(),
+			pos = val.length,
+			res = '',
+			separator = ',';
+
+		while (pos > 3){
+				pos -= 3;
+				res = separator + val.substr(pos, 3) + res;
+			}
+		if (pos){
+			res = val.substr(0, pos) + res;
+		}
+
+		$('#demo2').text(res);
+	},500);
+	</script>
+</body>
+</html>

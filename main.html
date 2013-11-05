@@ -7,20 +7,27 @@
 </head>
 <body>
 	<div class="wrap">
-		<p>以某个特定的数开始递增。','分割位数。</p>
+		<p>1 以某个特定的数开始递增。','分割位数。</p>
 		<div class="amount">
-			<div >当日预计流量</div>
-			<div id="traffic" class="traffic">47,998,983</div>
+			<div >（50,990,990）</div>
+			<div id="demo1" class="traffic">50,990,990</div>
+		</div>
+	</div>
+
+	<div class="wrap">
+		<p>2 以一日（86400秒）为基准计算。基数是50亿</p>
+		<div class="amount">
+			<div >日流量</div>
+			<div id="demo2" class="traffic">47,998,983</div>
 		</div>
 	</div>
 
 	<script src="libs/jquery-1.9.1.min.js"></script>
 	<script>
 	setInterval(function(){
-		var currentVal = $('#traffic').text();
+		var currentVal = $('#demo1').text();
 		var val = currentVal.replace(/,/g,'');
 		val++;
-
 		val = val.toString();
 		var pos = val.length;
 		var res = '';
@@ -34,7 +41,27 @@
 			res = val.substr(0, pos) + res;
 		}
 
-		$('#traffic').text(res);
+		$('#demo1').text(res);
+	},500);
+
+	setInterval(function(){
+		var total = 5000000000, // 50亿
+			date = new Date(),
+			time = date.getHours()*60*60+date.getMinutes()*60+date.getSeconds(),
+			val = Math.round((total*time/86400+ total/86400*3)).toString(),
+			pos = val.length,
+			res = '',
+			separator = ',';
+
+		while (pos > 3){
+				pos -= 3;
+				res = separator + val.substr(pos, 3) + res;
+			}
+		if (pos){
+			res = val.substr(0, pos) + res;
+		}
+
+		$('#demo2').text(res);
 	},500);
 	</script>
 </body>

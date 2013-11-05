@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数字递增</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+</head>
+<body>
+	<div class="wrap">
+		<p>以某个特定的数开始递增。','分割位数。</p>
+		<div class="amount">
+			<div >当日预计流量</div>
+			<div id="traffic" class="traffic">47,998,983</div>
+		</div>
+	</div>
+
+	<script src="libs/jquery-1.9.1.min.js"></script>
+	<script>
+	setInterval(function(){
+		var currentVal = $('#traffic').text();
+		var val = currentVal.replace(/,/g,'');
+		val++;
+
+		val = val.toString();
+		var pos = val.length;
+		var res = '';
+		var separator = ',';
+
+		while (pos > 3){
+				pos -= 3;
+				res = separator + val.substr(pos, 3) + res;
+			}
+		if (pos){
+			res = val.substr(0, pos) + res;
+		}
+
+		$('#traffic').text(res);
+	},500);
+	</script>
+</body>
+</html>

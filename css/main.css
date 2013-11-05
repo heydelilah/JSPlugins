@@ -1,0 +1,27 @@
+body{
+	font-family: Georgia;
+}
+.wrap{
+	margin: 30px;
+}
+.amount{
+	margin-top: 18px;
+	font-size: 16px;
+	color: #333;
+	float: left;
+	width: 327px;
+	height: 84px;
+	padding: 0 16px;
+	padding-top: 14px;
+	background-color: #FFF;
+	box-shadow: 0px 5px 15px #ddd;
+}
+.amount .traffic{
+	font-size: 30px;
+	margin-top: 7px;
+}
+
+p{
+	color: #999;
+	margin: 0;
+}

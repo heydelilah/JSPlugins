@@ -1,13 +1,12 @@
 ﻿# 文件上传
 
-![img](uploader.tiff)
-
 - 面向对象；动态构建；
 - 文件大小格式检查
 - 使用 FormData;
 - Bootstrap 样式
 - Express 服务端；
 
+![img](../imgs/uploader.png)
 
 #### 遇到的坑：
 

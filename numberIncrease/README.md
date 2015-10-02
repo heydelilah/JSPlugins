@@ -10,4 +10,4 @@ numberIncrease
 
 ### Other
 * @20131105
-* http://heydelilah.github.io/numberIncrease
+* http://heydelilah.github.io/JSPlugins

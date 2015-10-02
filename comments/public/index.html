@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Comments</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+	  <section class="col-xs-10 col-xs-offset-1" comment>
+        <hr/>
+        <div class="commentHeader">
+            <div class="allComment pull-left"><em class="glyphicon glyphicon-comment"></em>&nbsp;全部评论(<span class="J_CommentAll"></span>)</span></div>
+            <em class="glyphicon glyphicon-menu-up pull-right J_CommentToggleBtn"></em>
+        </div>
+        <div style="clear: both;"></div>
+
+        <!-- 主内容 -->
+        <div class="commentContent">
+            <div class="commentList"></div>
+            <div class="J_loading loading"><span></span></div>
+        </div>
+
+        <!-- 分页器 -->
+        <div class="commentPaging pull-right">
+            <ul class="paging" pagination></ul>
+        </div>
+
+        <!-- 发表评论 -->
+        <div style="clear:both;"></div>
+        <div class="makeComment J_Comment_panel">
+            <div class="makeCommentHeader"><span>发表评论</span></div>
+            <div class="makeCommentAuthor"><span><a href="#">$nick</a></span></div>
+            <div class="makeCommentContent">
+                <!-- 回复一级评论 -->
+                <!-- 此处id应为文章id-->
+                <textarea name="makeComment" id="" placeholder="写下你的评论..."></textarea>
+            </div>
+            <div class="makeCommentSubmit pull-right">
+                您还可以输入200字符
+                <button data-type="comment" class="ml5 J_Comment btn btn-primary">发表评论</button>
+            </div>
+        </div>
+
+        <div class="hidden" commentReplyPopwin></div>
+        <div class="hidden" commentEditPopwin></div>
+        <div class="hidden J_hook_userName">$nick</div>
+    </section>
+
+    <!-- 内嵌模块-留言板 -->
+    <script type="text/x-template" id="J_comment_template">
+        <% _.forEach(comments, function(item){ %>
+            <div class="comment_wrapper">
+                <div class="comment_head">
+                    <span class="comment_head_name">
+                        <a><%=item.Name%></a>
+                    </span>
+                    <span class="comment_head_date ml5">
+                        <%=item.Date%>
+                    </span>
+                </div>
+                <div class="comment_content">
+                    <%=item.Content%>
+                </div>
+                <div class="comment_op_ctrl" data-id=<%=item.Id%> data-name=<%=item.Name%> >
+                    <span class="comment_button_like J_like <%if(item.IsAuthorLike){%>act<%}%>">
+                        <em class="glyphicon <%if(item.IsAuthorLike){%> glyphicon-heart <%}else{%>glyphicon-heart-empty<%}%>"></em>
+                        喜欢(<i><%=item.Like%></i>)
+                    </span>
+                    <span class="comment_button_reply J_reply">回复(<i><%=item.List_amt%></i>)</span>
+                    <span class="comment_button_edit J_edit <%if(!item.IsAuthor){%>hidden<%}%>">编辑</span>
+                    <span class="comment_button_delete J_delete <%if(!item.IsAuthor){%>hidden<%}%>">删除</span>
+                </div>
+                <div class="comment_group">
+                    <% _.forEach(item.List, function(reply){ %>
+                    <div class="comment_item">
+                        <div class="comment_head">
+                            <span class="comment_head_name mr5">
+                                <a><%=reply.User_send%></a>
+                            </span>
+                            <span>回复</span>
+                            <span class="comment_head_name ml5">
+                                <a><%=reply.User_receive%></a>
+                            </span>
+                            <span class="comment_head_date ml5">
+                                <%=reply.Date%>
+                            </span>
+                        </div>
+                        <div class="comment_content">
+                            <%=reply.Content%>
+                        </div>
+                        <div class="comment_op_ctrl" data-id=<%=reply.Id%> data-name=<%=reply.User_send%> >
+                            <span class="comment_button_reply J_reply">回复</span>
+                            <span class="comment_button_delete J_delete <%if(!reply.IsAuthor){%>hidden<%}%>">删除</span>
+                        </div>
+                    </div>
+                    <% })%>
+                </div>
+            </div>
+        <% })%>
+    </script>
+
+    	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="../bower_components/lodash/lodash.min.js"></script>
+    <script src="comments.js"></script>
+    <script src="pager.js"></script>
+
+    <script>
+    	new CommentControl('[comment]')
+    </script>
+</body>
+</html>

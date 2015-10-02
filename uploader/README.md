@@ -1,6 +1,6 @@
 ﻿# 文件上传
 
-![img](../imgs/uploader.tiff)
+![img](uploader.tiff)
 
 - 面向对象；动态构建；
 - 文件大小格式检查

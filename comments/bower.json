@@ -1,0 +1,22 @@
+{
+  "name": "comments",
+  "version": "0.0.0",
+  "authors": [
+    "小丛 <lj105021@alibaba-inc.com>"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap": "~3.3.5",
+    "lodash": "~3.10.1"
+  }
+}

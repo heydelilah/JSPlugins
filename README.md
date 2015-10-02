@@ -19,4 +19,4 @@
 		- 以某个特定的数开始递增。','分割位数。
 		- 以一日（86400秒）为基准计算。基数是50亿
 	2. Date: @20131105
-	3. Live: http://heydelilah.github.io/numberIncrease
+	3. Live: http://heydelilah.github.io/JSPlugins

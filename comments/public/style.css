@@ -1,0 +1,190 @@
+[comment] {
+    font-size: 13px;
+}
+.commentContent {
+    padding: 18px;
+    position: relative;
+}
+
+.commentContent ul {
+    list-style: none;
+}
+
+/*评论模块*/
+.allComment{
+    font-size: 14px;
+    color: #333;
+}
+.comment_wrapper{
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-bottom: solid 1px #eee;
+    padding-bottom: 20px;
+}
+
+.comment_head{}
+.comment_head_name{}
+.comment_head_date{}
+
+.comment_content{
+    margin-top: 5px;
+}
+.comment_op_ctrl{
+    float: right;
+}
+
+/*按钮hover*/
+.comment_op_ctrl span:hover{
+    color: #2e96ea;
+    cursor: pointer;
+}
+
+
+/*“点赞” 激活状态*/
+.comment_button_like .glyphicon-heart{
+    color: #eb4f38;
+}
+.comment_op_ctrl span.act{
+    cursor: default;
+}
+.comment_button_like em:hover{
+    color: #eb4f38;
+}
+.comment_op_ctrl span.act:hover{
+    color: inherit;
+}
+
+.comment_button_reply{}
+.comment_button_edit{}
+
+.comment_op_ctrl span{
+    padding: 0 10px;
+    border-left: #000 solid 1px;
+}
+.comment_op_ctrl .comment_button_like{
+    border-left: none;
+}
+/*特殊处理－ 二级评论下的回复控件左侧去掉横线*/
+.comment_item .comment_op_ctrl .comment_button_reply{
+    border-left: none;
+}
+.comment_op_ctrl span i{
+    font-style: normal;
+}
+
+
+.comment_group{
+    padding: 0 10px;
+    margin-top: 30px;
+    /*缩进*/
+    /*margin-left: 1em;*/
+    clear: right;
+}
+.comment_item{
+    background-color: #f6f6f6;
+    overflow: hidden;
+    margin: 5px;
+    padding: 10px;
+}
+
+
+/*回复弹框*/
+.comment_popwin{
+    margin-top: 20px;
+    overflow: hidden;
+    clear: both;
+}
+.comment_popwin textarea {
+    resize: vertical;
+    min-width: 100%;
+    max-width: 100%;
+    height: 30px;
+    border: 1px solid #CCC;
+    padding: 5px;
+}
+.comment_popwin .buttons{
+    margin-top: 10px;
+    float: right;
+}
+.comment_popwin .btn-cancel{
+    margin-right: 10px;
+}
+
+.comment_edit_popwin{
+    margin-bottom: 20px;
+}
+.comment_edit_popwin textarea{
+    height: 60px;
+}
+
+/*=============================================*/
+.J_CommentToggleBtn:hover {
+    cursor: pointer;
+}
+
+
+.makeCommentHeader span {
+    font-size: 16px;
+    font: bold;
+}
+
+.makeCommentAuthor {
+    padding: 8px 0;
+}
+
+.makeCommentContent textarea {
+    resize: vertical;
+    min-height: 100px;
+    border: 1px solid #CCC;
+    padding: 10px;
+}
+
+.makeCommentSubmit {
+    margin-top: 20px;
+    margin-bottom: 100px;
+    color: #999999;
+}
+
+.makeCommentContent textarea {
+    width: 100%;
+}
+/*=======================*/
+
+.paging {
+    visibility: hidden;
+}
+.pagination li {
+    display: inline-block;
+}
+
+.pagination li span {
+    color: #777;
+    border: 1px solid #CCC;
+    padding: 7px 9px;
+    margin: 0 2px;
+}
+
+.pagination li span:hover {
+    color: #FFF;
+    border: 1px solid #CCC;
+    background-color: #2e96ea;
+    cursor: pointer;
+}
+
+.pagination li.disabled span {
+    color: #CCC;
+}
+
+.pagination li.disabled span:hover {
+    color: #CCC;
+    border: 1px solid #CCC;
+    /*padding*/: 4px 8px;
+    background-color: white;
+    cursor: not-allowed;
+}
+
+.pagination li.active span {
+    color: #fff;
+    border-color: #ccc;
+    background-color: #2e96ea;
+}

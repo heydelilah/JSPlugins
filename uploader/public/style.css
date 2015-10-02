@@ -1,0 +1,64 @@
+body{
+	padding: 20px;
+}
+.Upload_wrapper{
+	position: relative;
+	color: #eee;
+}
+.Upload_btn{
+	top: 0;
+	left: 0;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	cursor: pointer !important;
+	position: absolute;
+}
+.Upload_tips{
+	color: #9c9c9c;
+	font-size: 10px;
+	margin-left: 10px;
+}
+.Upload_list{
+	margin-top: 20px;
+	color: #555;
+	min-height: 100px;
+}
+.Upload_listItem{
+	margin-bottom: 10px;
+}
+.Upload_listItem em{
+	margin-right: 5px;
+}
+.Upload_listItem span{
+	margin-right: 25px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.Upload_listItem span:hover{
+	color: #000;
+}
+.Upload_listItem label{
+	font-weight: normal;
+	cursor: pointer;
+}
+.Upload_listItem .name{
+	width: 200px;
+	overflow: hidden;
+	white-space: nowrap;
+	display: inline-block;
+	text-overflow: ellipsis;
+}
+.Upload_listItem .showable input{
+	margin-right: 5px;
+}
+.Upload_listItem .downloadable input{
+	margin-right: 5px;
+}
+.Uploader .result{
+	margin-left: 1em;
+	color: red;
+}
+.Uploader .result.done{
+	color: green;
+}

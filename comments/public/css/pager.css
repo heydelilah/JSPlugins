@@ -1,0 +1,38 @@
+.paging {
+    visibility: hidden;
+}
+.pagination li {
+    display: inline-block;
+}
+
+.pagination li span {
+    color: #777;
+    border: 1px solid #CCC;
+    padding: 7px 9px;
+    margin: 0 2px;
+}
+
+.pagination li span:hover {
+    color: #FFF;
+    border: 1px solid #CCC;
+    background-color: #2e96ea;
+    cursor: pointer;
+}
+
+.pagination li.disabled span {
+    color: #CCC;
+}
+
+.pagination li.disabled span:hover {
+    color: #CCC;
+    border: 1px solid #CCC;
+    /*padding*/: 4px 8px;
+    background-color: white;
+    cursor: not-allowed;
+}
+
+.pagination li.active span {
+    color: #fff;
+    border-color: #ccc;
+    background-color: #2e96ea;
+}

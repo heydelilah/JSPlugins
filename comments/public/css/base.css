@@ -1,0 +1,21 @@
+.ml5{
+    margin-left: 5px;
+}
+.mr5{
+    margin-right: 5px;
+}
+header{
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+    background-color: rgba(32, 154, 212, 0.51);;
+    padding: 20px;
+}
+header .title{
+}
+
+.affix{
+    position: fixed;
+    top: 0;
+    left: 0;
+}

@@ -16,6 +16,7 @@
 - Express
 - Bourne
 - RESTful API
+- 接口设计：https://github.com/heydelilah/JSPlugins/blob/master/comments/docs/data_structure.md
 
 ### 备注：
 
@@ -28,6 +29,7 @@
 
 	npm install
 	bower install
+	node server.js
 	访问： http://localhost:3000/
 
 ### TODO
@@ -44,6 +46,10 @@
 
 - [阮一峰: RESTful API 设计指南](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)
 - [Andrew: bourne](https://github.com/andrew8088/bourne)
+
+### 截图
+
+![img](../imgs/comments.png)
 
 
 

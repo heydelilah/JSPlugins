@@ -11,15 +11,13 @@ $.extend(CommentControl.prototype, {
 
         me.config = {
             // 当前登陆者花名
-            'USER_NAME': $('.J_hook_userName').text(),
+            'USER_NAME': window.user.name,
 
             // 评论模块－单页显示数量
             'COMMENT_PAGE_LIMIT': 20,
 
-            // 加载评论
-            'COMMENT_URL': '/comments',
-            // 点赞
-            'COMMENT_LIKE_URL': '/comments',
+            // 评论
+            'COMMENT_URL': '/api/comments'
         };
 
         // 全局弹框 －回复评论
@@ -31,7 +29,8 @@ $.extend(CommentControl.prototype, {
         me.$loading = me.$el.find('.J_loading');
 
         // 获取当前文章id
-        me.articleId = window.location.search.match(/id=(\d+)/)[1];
+        var id = window.location.search.match(/id=(\d+)/);
+        me.articleId = id ? id[1] : 10;
 
         // 分页器配置
         me.pager = {
@@ -41,7 +40,7 @@ $.extend(CommentControl.prototype, {
         };
 
         // 当前回复对象的id
-        me.peopleId = 0;
+        me.commentId = 0;
         // 当前回复对象的花名
         me.peopleName = '';
 
@@ -56,8 +55,11 @@ $.extend(CommentControl.prototype, {
         me.initReplyPanel();
         me.initEditPanel();
 
+        me.$el.find('.J_User').text(me.config.USER_NAME);
+
         // 加载评论数据
         me.load();
+
     },
 
     // 绑定事件
@@ -129,16 +131,15 @@ $.extend(CommentControl.prototype, {
         me.showLoading();
 
         // 拉数据
-        // $.get(
-        //     me.config.COMMENT_URL,
-        //     {
-        //         'Id': me.articleId, // 文章Id
-        //         'PageSize': me.pager.limit,
-        //         'PageIndex': me.pager.page
-        //     },
-        //     $.proxy(me.onData, me)
-        // );
-        me.onData();
+        $.get(
+            me.config.COMMENT_URL,
+            {
+                'ArticleId': me.articleId, // 文章Id
+                'PageSize': me.pager.limit,
+                'PageIndex': me.pager.page
+            },
+            $.proxy(me.onData, me)
+        );
     },
     // 拉回数据
     onData: function(data){
@@ -167,85 +168,14 @@ $.extend(CommentControl.prototype, {
     },
     // 设置数据
     setData: function(data){
-        data = '{"replyMap":{"4765":[],"4767":[],"6497":[],"4763":[]},"pageList":"[{"infoId\":11006,\"content\":\"l\",\"id\":6497,\"gmtCreate\":\"Sep 25, 2015 10:57:25 PM\",\"gmtModified\":\"Sep 25, 2015 10:57:25 PM\",\"creator\":\"小丛\",\"modifier\":\"小丛\",\"status\":1,\"defaultBiz\":true},{\"infoId\":11006,\"commNick\":\"天衣\",\"content\":\"天衣 + @ 天衣 +@天衣\",\"id\":4767,\"gmtCreate\":\"Jul 8, 2015 4:41:42 PM\",\"gmtModified\":\"Jul 8, 2015 4:41:42 PM\",\"creator\":\"紫胤\",\"modifier\":\"紫胤\",\"status\":1,\"defaultBiz\":true},{\"infoId\":11006,\"commNick\":\"天衣\",\"content\":\"@天衣\",\"id\":4765,\"gmtCreate\":\"Jul 8, 2015 4:33:35 PM\",\"gmtModified\":\"Jul 8, 2015 4:33:35 PM\",\"creator\":\"紫胤\",\"modifier\":\"紫胤\",\"status\":1,\"defaultBiz\":true},{\"infoId\":11006,\"commNick\":\"沈飞\",\"content\":\"@沈飞\",\"id\":4763,\"gmtCreate\":\"Jul 8, 2015 4:30:08 PM\",\"gmtModified\":\"Jul 8, 2015 4:30:08 PM\",\"creator\":\"紫胤\",\"modifier\":\"紫胤\",\"status\":1,\"defaultBiz\":true}]","userLikeAmountMap":{"4765":1,"4767":1,"4763":1},"commentCount":4,"likeAmountMap":{"4765":1,"4767":1,"4763":1}}';
-
         var me = this,
-            orig_data = {
-              "replyMap": {
-                "4765": [],
-                "4767": [],
-                "6497": [],
-                "4763": []
-              },
-              "pageList": [],
-              "userLikeAmountMap": {
-                "4765": 1,
-                "4767": 1,
-                "4763": 1
-              },
-              "commentCount": 4,
-              "likeAmountMap": {
-                "4765": 1,
-                "4767": 1,
-                "4763": 1
-              }
-            },
-            // 评论列表
-            comments = [
-                  {
-                    "infoId": 11006,
-                    "content": "l",
-                    "id": 6497,
-                    "gmtCreate": "Sep 25, 2015 10:57:25 PM",
-                    "gmtModified": "Sep 25, 2015 10:57:25 PM",
-                    "creator": "小丛",
-                    "modifier": "小丛",
-                    "status": 1,
-                    "defaultBiz": true
-                  },
-                  {
-                    "infoId": 11006,
-                    "commNick": "天衣",
-                    "content": "天衣 + @ 天衣 +@天衣",
-                    "id": 4767,
-                    "gmtCreate": "Jul 8, 2015 4:41:42 PM",
-                    "gmtModified": "Jul 8, 2015 4:41:42 PM",
-                    "creator": "紫胤",
-                    "modifier": "紫胤",
-                    "status": 1,
-                    "defaultBiz": true
-                  },
-                  {
-                    "infoId": 11006,
-                    "commNick": "天衣",
-                    "content": "@天衣",
-                    "id": 4765,
-                    "gmtCreate": "Jul 8, 2015 4:33:35 PM",
-                    "gmtModified": "Jul 8, 2015 4:33:35 PM",
-                    "creator": "紫胤",
-                    "modifier": "紫胤",
-                    "status": 1,
-                    "defaultBiz": true
-                  },
-                  {
-                    "infoId": 11006,
-                    "commNick": "沈飞",
-                    "content": "@沈飞",
-                    "id": 4763,
-                    "gmtCreate": "Jul 8, 2015 4:30:08 PM",
-                    "gmtModified": "Jul 8, 2015 4:30:08 PM",
-                    "creator": "紫胤",
-                    "modifier": "紫胤",
-                    "status": 1,
-                    "defaultBiz": true
-                  }
-                ],
+            comments = data.items,
             // 映射表 －二级回复
-            mapping = orig_data.replyMap,
+            mapping = data.mapping,
             // 映射表 －点赞
-            like = orig_data.likeAmountMap,
+            like,
             // 当前登陆用户 点赞过的评论
-            ILike = orig_data.userLikeAmountMap,
+            ILike,
 
             result = [],
             i, ii, valueI, valueII, replyList;
@@ -254,7 +184,7 @@ $.extend(CommentControl.prototype, {
             // 单条一级评论
             valueI = comments[i];
 
-            replyList = mapping[valueI.id];
+            replyList = mapping[valueI.Id] || [];
 
             // 创建一个新数组
             var child = [];
@@ -264,30 +194,35 @@ $.extend(CommentControl.prototype, {
                 valueII = replyList[ii];
 
                 child.push({
-                    'Id': valueII.id,
-                    'User_send': valueII.creator,
-                    'Date': me._formatDate(valueII.gmtCreate, "yyyy-MM-dd hh:mm"),
-                    'Content': valueII.content,
-                    'User_receive': valueII.commNick,
-                    'IsAuthor': me.config.USER_NAME == valueII.creator
+                    'Id': valueII.Id,
+                    'User_send': valueII.UserName,
+                    'Date': me._formatDate(valueII.TimeCreate, "yyyy-MM-dd hh:mm"),
+                    'Content': valueII.Content,
+                    'User_receive': valueII.PeopleName,
+                    'IsAuthor': me.config.USER_NAME == valueII.UserName
                 })
             };
 
+            like = valueI.Like && valueI.Like.split(',')||[];
+            ILike = _.find(like, function(chr){
+                return +chr === window.user.id;
+            });
+
             result.push({
-                'Id': valueI.id,
-                'Name': valueI.creator,
-                'Date': me._formatDate(valueI.gmtCreate, "yyyy-MM-dd hh:mm"),
-                'Content': valueI.content,
+                'Id': valueI.Id,
+                'Name': valueI.UserName,
+                'Date': me._formatDate(valueI.TimeCreate, "yyyy-MM-dd hh:mm"),
+                'Content': valueI.Content,
                 'List':child,
                 'List_amt': child.length,
-                'Like': like[valueI.id]||0,
-                'IsAuthor': me.config.USER_NAME == valueI.creator,
-                'IsAuthorLike': ILike[valueI.id]
+                'Like': like.length || 0,
+                'IsAuthor': me.config.USER_NAME == valueI.UserName,
+                'IsAuthorLike': ILike
             });
         };
 
         // 更新评论总数
-        me.pager.total = orig_data.commentCount;
+        me.pager.total = comments.length;
 
         me.data = result;
     },
@@ -318,7 +253,7 @@ $.extend(CommentControl.prototype, {
             name = $target.attr('data-name');
 
         // 更新当前回复对象信息
-        me.peopleId = id;
+        me.commentId = id;
         me.peopleName = name;
 
         me.showReplyPanel($target);
@@ -333,18 +268,18 @@ $.extend(CommentControl.prototype, {
 
         // 更新当前回复对象id
         if($target.attr('data-type')){
-            me.peopleId = 0;
+            me.commentId = 0;
         }
 
         if(value){
             $.ajax({
                 type:'POST',
-                url: me.config.COMMENT_ADD_URL,
+                url: me.config.COMMENT_URL,
                 data: {
-                    'infoId': me.articleId,                         // 文章Id
-                    'commentId': me.peopleId || '',                       // 评论ID，回复对象的id
-                    'commNick': me.peopleId ? me.peopleName: '',    // 回复对象的花名
-                    'content': value                                // 评论内容
+                    'ArticleId': me.articleId, // 文章Id
+                    'CommentId': me.commentId || '',                        // 评论ID
+                    'PeopleName': me.commentId ? me.peopleName: '',    // 回复对象的花名
+                    'Content': value                                // 评论内容
                 },
                 success:function(data) {
                     console.log(data);
@@ -382,7 +317,7 @@ $.extend(CommentControl.prototype, {
             me.$content.hide();
 
         // 更新当前回复对象信息
-        me.peopleId = id;
+        me.commentId = id;
 
         me.showEditPanel($ctrl, value);
     },
@@ -396,11 +331,11 @@ $.extend(CommentControl.prototype, {
         me.$content.show();
         if(value){
             $.ajax({
-                type:'POST',
-                url: me.config.COMMENT_EDIT_URL,
+                type:'PUT',
+                url: me.config.COMMENT_URL,
                 data: {
-                    'commentId': me.peopleId,
-                    'content': value
+                    'Id': +me.commentId,
+                    'Content': value
                 },
                 success:function(data) {
                     console.log(data);
@@ -433,13 +368,12 @@ $.extend(CommentControl.prototype, {
 
         if(confirm('确定要删除此评论吗？')){
             $.ajax({
-                type:'POST',
-                url: me.config.COMMENT_DEL_URL,
+                type:'Delete',
+                url: me.config.COMMENT_URL,
                 data: {
-                    'commentId': id
+                    'Id': +id
                 },
                 success:function(data) {
-                    console.log(data);
                     me.load();
                 },
                 error: function(data) {
@@ -458,11 +392,8 @@ $.extend(CommentControl.prototype, {
         // 不可重复点赞
         if(!alreadyLike){
             $.ajax({
-                type:'POST',
-                url: me.config.COMMENT_LIKE_URL,
-                data: {
-                    'commentId': id
-                },
+                type:'PUT',
+                url: me.config.COMMENT_URL+'/'+id+'/like',
                 success:function(data) {
                     console.log(data);
                     me.load();

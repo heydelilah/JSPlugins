@@ -4,10 +4,15 @@
 	<meta charset="UTF-8">
 	<title>Comments</title>
 	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
-	  <section class="col-xs-10 col-xs-offset-1" comment>
+    <header id="myAffix" class="">
+        <div class="title">测试</div>
+        <label>当前用户：</label><span class="user J_user"></span>
+    </header>
+
+	  <section  comment>
         <hr/>
         <div class="commentHeader">
             <div class="allComment pull-left"><em class="glyphicon glyphicon-comment"></em>&nbsp;全部评论(<span class="J_CommentAll"></span>)</span></div>
@@ -30,7 +35,7 @@
         <div style="clear:both;"></div>
         <div class="makeComment J_Comment_panel">
             <div class="makeCommentHeader"><span>发表评论</span></div>
-            <div class="makeCommentAuthor"><span><a href="#">$nick</a></span></div>
+            <div class="makeCommentAuthor"><span><a class="J_User" href="#"></a></span></div>
             <div class="makeCommentContent">
                 <!-- 回复一级评论 -->
                 <!-- 此处id应为文章id-->
@@ -44,7 +49,6 @@
 
         <div class="hidden" commentReplyPopwin></div>
         <div class="hidden" commentEditPopwin></div>
-        <div class="hidden J_hook_userName">$nick</div>
     </section>
 
     <!-- 内嵌模块-留言板 -->
@@ -100,8 +104,20 @@
         <% })%>
     </script>
 
-    	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<script src="../bower_components/lodash/lodash.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="bower_components/lodash/lodash.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+        var user = {
+            id: 1,
+            name: "Delilah"
+        };
+
+        $('.J_user').text(user.name);
+
+        $('#myAffix').affix();
+
+    </script>
     <script src="comments.js"></script>
     <script src="pager.js"></script>
 

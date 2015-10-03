@@ -44,6 +44,11 @@
 
 3. 返回数据：
 
+        {
+            'items': [],
+            'mapping': []
+        }
+
 #### '/api/comments' － 新建一条评论
 
 1. POST
@@ -51,10 +56,8 @@
 
     	'ArticleId': 	// 文章Id
     	'CommentId': 	// 评论ID
-    	'PeopleName': 	// 回复对象的花名
+    	'PeopleName': 	// 回复对象的名称
     	'Content': 		// 评论内容
-
-3. 返回数据：
 
 #### '/api/comments' － 更新某条评论
 
@@ -63,8 +66,6 @@
 
     	'Id'
     	'Content'
-
-3. 返回数据：
 
 #### '/api/comments' － 删除某条评论
 
@@ -75,7 +76,9 @@
 
 3. 返回数据：
 
-###
+    null
+
+### 其他
 
 - 用户Id: 1-9
 - 文章Id: 10-99
